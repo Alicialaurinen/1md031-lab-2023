@@ -1,1 +1,118 @@
-Hello world
+<!DOCTYPE HTML>
+<html lang="en">
+   <head>
+       <title>Page title shown in window title</title>
+       <meta charset="utf-8"/>
+   </head>
+   <body>
+    <header>
+        <h1>Burgers Online</h1>
+    </header>
+    <main>
+        <h2> Select burger </h2>
+        <p1> This is where you select burger </p1>
+         
+        <section id = "Burgers">
+            <div style = "display: inline-block">
+            <h3>
+                The Mouth-Watering Burger
+            </h3>
+            <img class= "bilder" src="img/Mouthwateringburger.jpeg " width="300" 
+            height="300" />
+            <dl>
+                <dt>Can be ordered as:</dt>
+                <dd>Gluten-free</dd>
+                <dd>Cruelty-Free</dd>
+
+            </dl>
+        </div>
+        <div style = "display: inline-block">
+            <h3>
+                The Devils-Burger
+            </h3>
+            <img class= "bilder" src="img/devils burger - stor – medel.jpeg" width="300" 
+            height="300" />
+            <dl>
+                <dt>Can be ordered as:</dt>
+                <dd>Gluten-free</dd>
+                <dd>Lactose-Free</dd>
+
+            </dl>
+        </div>
+        <div style = "display: inline-block" >
+            <h3>
+                The Basic Cheese-Burger
+            </h3>
+            <img class= "bilder" src="img/THEcheeseburger.jpeg" width="300" 
+            height="300" />
+            <dl>
+
+                <dt>Can be ordered as:</dt>
+                <dd>Gluten-free</dd>
+                <dd>Fat-Free</dd>
+
+            </dl>
+        </div>
+        </section>
+    
+        <section id = "contact"> 
+            <h4>
+                Enter customer information
+            </h4>
+            <form>
+                <p>
+                    <label for="firstname">Full name</label><br>
+                    <input type="text" id="firstname" name="fn" required="required" placeholder="First and lastname">
+                </p>
+                <p>
+                    <label for="email">E-mail</label><br>
+                    <input type="email" id="email" name="em" required="required" placeholder="E-mail address" >
+                </p>
+                <p>
+                    <label for="street">Street</label><br>
+                    <input type="text" id="street" name="st" required="required" placeholder="Street name">
+                    
+                </p>
+                <p>
+                    <label for="housenumber">Street</label><br>
+                    <input type="number" id="housenumber" name="hn" required="required" placeholder="House number" maxlength="10">
+                </p>
+                <p>
+                    <label for="payment">Payment method</label><br>
+                    <select id="paymentmethod" name="pm">
+                        <option>Klarna</option>
+                        <option selected = "selected">Swish</option>
+                        <option>Debit-Card</option>
+                        <option>Credit-Card</option>
+                        <option>Svea</option>
+                        
+                    </select>
+                 </p>
+                 <p style = "display: inline-block">
+                    <label for="gender">Gender</label><br>
+                    <label>
+                        <input type="radio" name = "gender" value="Female" checked > Female
+                    </label>
+                    <label>
+                        <input type="radio" name = "gender" value="Male" > Male
+                    </label>
+                    <label>
+                        <input type="radio" name = "gender" value="unspecified" > Do not wish to provide
+                    </label>
+                 </p>
+
+            </form>
+        
+            <button type="submit"> Place Order
+                <img src="img/send.png" width="70" height="30">
+              </button> <br>
+
+        </section>
+    </main>
+    <footer>
+        <hr>
+        &COPY; 2023 ALLES BURGERS INC.
+        
+    </footer>
+</body>
+</html>

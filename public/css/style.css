@@ -1,0 +1,80 @@
+/* Your comment goes here */
+@import 'https://fonts.googleapis.com/css?family=Pacifico|Dosis';
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+ }
+ header {
+    background-image: url("../img/bakgrundhamburger.jpeg");
+    opacity: 0.8;
+    text-align: center;
+    height: 410px;
+    color: black;
+    overflow:hidden
+   
+
+ }
+ 
+ h3{
+    padding: 20px;
+    font-size: 20px
+ }
+
+ .Burgers {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 15px double whitesmoke;
+    color: #ff5500;
+ }
+
+ #chooseburger { 
+    background-color: black;
+    color: whitesmoke;
+
+ }
+ 
+ 
+ #Devils-Burger {
+   
+ }
+ #THEcheeseburger {
+   
+
+ }
+
+ div {
+
+    padding: 10px 65px 10px;
+    margin: 1px 2px 3px 4px;
+    text-align: center;
+
+ }
+ button:hover {
+    background-color: blueviolet;
+    cursor: pointer;
+ }
+ #contact {
+    border: 5px dashed darkgreen;
+    background-color: aquamarine;
+    margin-left: 20px;
+    margin-right: 20px;
+    
+ }
+ button {
+    margin-top: 50px;
+    margin-bottom: 10px;
+ }
+
+ .wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.box {
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+}

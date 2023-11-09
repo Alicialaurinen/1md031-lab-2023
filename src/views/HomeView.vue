@@ -1,22 +1,111 @@
 <template>
-  <div>
-    <div>
-      <h1>Burgers</h1>
-      <Burger v-for="burger in burgers"
-              v-bind:burger="burger" 
-              v-bind:key="burger.name"/>
-    </div>
-    <div id="map" v-on:click="addOrder">
+    <!-- <div id="map" v-on:click="addOrder">
       click here
-    </div>
-  </div>
+    </div> -->
+  <header>
+        <h1>Burgers Online</h1>
+
+    </header>
+    <main>
+        <section class="Burgers" id="chooseburger">
+            <h2> Select burger </h2>
+            <p1> This is where you select burger </p1>
+            <div class="wrapper">
+              <Burger v-for="burger in burgers"
+              v-bind:burger="burger" 
+              v-bind:key="burger.name"
+              v-on:orderedBurger="addToOrder($event)"/>
+            </div>
+
+        </section>
+
+        <section id="contact">
+            <h4>
+                Enter customer information
+            </h4>
+            <form>
+              
+                <p>
+                    <label for="firstname">Full name</label><br>
+                    <input type="text" id="firstname" v-model="fn" required="required" placeholder="First and lastname">
+                  
+                </p>
+                <p>
+                    <label for="email">E-mail</label><br>
+                    <input type="email" id="email" v-model="em" required="required" placeholder="E-mail address">
+                </p>
+                <p>
+                    <label for="street">Street</label><br>
+                    <input type="text" id="street" v-model="st" required="required" placeholder="Street name">
+
+                </p>
+                <p>
+                    <label for="housenumber">Street</label><br>
+                    <input type="number" id="housenumber" v-model="hn" required="required" placeholder="House number"
+                        maxlength="10">
+                </p>
+                <p>
+                    <label for="payment">Payment method</label><br>
+                    <select id="paymentmethod" v-model="pm">
+                        <option>Klarna</option>
+                        <option selected="selected">Swish</option>
+                        <option>Debit-Card</option>
+                        <option>Credit-Card</option>
+                        <option>Svea</option>
+
+                    </select>
+                </p>
+                <p style="display: inline-block">
+                    <label for="gender">Gender</label><br>
+                    <label>
+                        <input type="radio" v-model="gender" value="Female" checked> Female
+                    </label>
+                    <label>
+                        <input type="radio" v-model="gender" value="Male"> Male
+                    </label>
+                    <label>
+                        <input type="radio" v-model="gender" value="unspecified"> Do not wish to provide
+                    </label>
+                </p>
+
+            </form>
+            
+            <button  class= "button"  type="submit" v-on:click="markDone"> Place Order
+                <img src="img/send.png" width="70" height="30">
+            </button> <br>
+
+        </section>
+
+
+
+    </main>
+    <footer>
+        <hr>
+        &COPY; 2023 ALLES BURGERS INC.
+
+    </footer>
 </template>
 
 <script>
 import Burger from '../components/OneBurger.vue'
 import io from 'socket.io-client'
+import menu from '../assets/menu.json'
 
 const socket = io();
+
+// function menuItem(nm , kc, url, gl, lac){
+//   this.name = nm;
+//   this.kcal = kc;
+//   this.gluten = gl;
+//   this.lactose = lac;
+//   this.URL = url;
+  
+// }
+// let allBurgers = [{name: "The Mouth-Watering Burger", kCal: 900, url:"img/Mouthwateringburger.jpeg ", gluten: "Gluten-Free", lactose: "Lactose-Free"},
+// {name: "The Devils-Burger", kCal: 100, url:"img/devils burger - stor – medel.jpeg", gluten: "Gluten-free", lactose: "Vegan" },
+// {name: "The Basic Cheese-Burger", kCal: 500, url:"img/THEcheeseburger.jpeg", gluten:"Fat-Free" , lactose: "Lactose-Free"}]
+// console.log(allBurgers)
+
 
 export default {
   name: 'HomeView',
@@ -25,12 +114,21 @@ export default {
   },
   data: function () {
     return {
-      burgers: [ {name: "small burger", kCal: 250},
-                 {name: "standard burger", kCal: 450},
-                 {name: "large burger", kCal: 850}
-               ]
+      burgers: menu,
+      fn: '',
+      em:'',
+      st:'',
+      hn:'',
+      pm:'',
+      gender:'',
+      orderedBurgers: ''
     }
   },
+    // created: function () {
+    //   socket.on('clientdata', data =>
+    //     this.contact = data.contact);
+    // },
+  
   methods: {
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
@@ -44,9 +142,26 @@ export default {
                                 orderItems: ["Beans", "Curry"]
                               }
                  );
+    },
+    addToOrder: function (event) {
+      //this.orderedBurgers = event;
+   console.log(this.orderedBurgers)
+
+  
+},
+    markDone: function (){
+        // socket.emit("addClient", { contact: this.contact,
+        //                         firstName: this.fn,
+                                
+        //                       }
+        //          );
+       // console.log(this.fn, this.em, this.st, this.hn, this.pm, this.gender)
+        
+      
+       }
     }
   }
-}
+
 </script>
 
 <style>
@@ -55,4 +170,87 @@ export default {
     height: 300px;
     background-color: red;
   }
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+ }
+ header {
+    background-image: url("../../public/img/bakgrundhamburger.jpeg");
+    opacity: 0.8;
+    text-align: center;
+    height: 410px;
+    color: black;
+    overflow:hidden;
+    width: 100%;
+
+ }
+ 
+ h3{
+    padding: 20px;
+    font-size: 20px
+ }
+
+ .Burgers {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 15px double whitesmoke;
+    text-align: center;
+    
+    
+ }
+
+ #chooseburger { 
+    background-color: black;
+    color: whitesmoke;
+
+ }
+ 
+ 
+
+ div {
+
+    /* padding: 10px 65px 10px; */
+    margin: 1px 2px 3px 4px;
+
+ }
+
+ button:hover {
+    background-color: blueviolet;
+    cursor: pointer;
+ }
+
+ #contact {
+    border: 5px dashed darkgreen;
+    background-color: aquamarine;
+    margin-left: 20px;
+    margin-right: 20px;
+
+ }
+ 
+
+ .wrapper {
+  
+  margin-top: 70px;
+  margin-bottom: 30px;
+    display: grid;
+    width:100%;
+    grid-column-gap: 1px;
+    grid-template-columns: repeat(3,1fr);
+}
+.bilder {
+  width: 300px;
+  height: 200px;
+
+} 
+.button {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    width: 70; 
+    height: 30;
+
+ }
+
+
 </style>

@@ -48,8 +48,8 @@
                   <div id="map" v-on:click="addOrder" >
                       click here
                   
-                 <div id = "dots" v-bind:style="{left: location.x + 'px', top: location.y + 'px'}" v-bind:key="'dots' + key" v-on:click="setLocation">
-                  {{key}}
+                 <div id = "dots" v-bind:style="{left: location.x + 'px', top: location.y + 'px'}" v-bind:key="'dots' + location" v-on:click="setLocation">
+                  {{location}}
                  </div>
                 </div>
                   

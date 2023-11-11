@@ -32,7 +32,7 @@
                     <label for="email">E-mail</label><br>
                     <input type="email" id="email" v-model="em" required="required" placeholder="E-mail address">
                 </p>
-                <p>
+                <!-- <p>
                     <label for="street">Street</label><br>
                     <input type="text" id="street" v-model="st" required="required" placeholder="Street name">
 
@@ -41,19 +41,23 @@
                     <label for="housenumber">Street</label><br>
                     <input type="number" id="housenumber" v-model="hn" required="required" placeholder="House number"
                         maxlength="10">
-                </p>
+                </p> -->
 
-                <section id = "map-container">
+                <div id = "map-container">
                   
                   <div id="map" v-on:click="addOrder" >
-                      click here
-                  
-                 <div id = "dots" v-bind:style="{left: location.x + 'px', top: location.y + 'px'}" v-bind:key="'dots' + location" v-on:click="setLocation">
-                  {{location}}
+                      click here to choose delivery adress
+                 <div id = "dots" v-bind:style="{left: location.x + 'px', top: location.y + 'px'}"  >
+                  <div>
+                    T
+                  </div>
+                 
                  </div>
                 </div>
+               
+                
                   
-                  </section>
+              </div>
                 <p>
                     <label for="payment">Payment method</label><br>
                     <select id="paymentmethod" v-model="pm">
@@ -79,9 +83,7 @@
                 </p>
 
               </form>
-            
-            
-            <button  class= "button"  type="submit" v-on:click="markDone"> Place Order
+            <button  v-on:click="markDone" class= "button"  type="submit" > Place Order
                 <img src="img/send.png" width="70" height="30">
             </button> <br>
             
@@ -102,6 +104,7 @@
 import Burger from '../components/OneBurger.vue'
 import io from 'socket.io-client'
 import menu from '../assets/menu.json'
+
 
 const socket = io();
 
@@ -140,40 +143,57 @@ export default {
     
   
   methods: {
+    markDone: function (){
+      console.log("hello")
+      console.log(this.location)
+    socket.emit("addOrder", { orderId: this.getOrderNumber(),
+                          details: { x: this.location.x,
+                                     y: this.location.y
+                                    },
+                                    
+                                    informationCustomer: { 
+                                      name : this.fn,
+                                      email: this.em,
+                                      paymentMethod: this.pm,
+                                      Gender: this.gender,
+
+                                    },
+                                    orderItems: this.orderedBurgers
+                                   
+
+
+                        }
+           );
+           
+ },
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
     },
     addOrder: function (event) {
       var offset = {x: event.currentTarget.getBoundingClientRect().left,
                     y: event.currentTarget.getBoundingClientRect().top};
-      socket.emit("addOrder", { orderId: this.getOrderNumber(),
-                                details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
-                                orderItems: ["Beans", "Curry"]
-                              }
-                 );
+      // socket.emit("addOrder", { orderId: this.getOrderNumber(),
+      //                           details: { x: event.clientX - 10 - offset.x,
+      //                                      y: event.clientY - 10 - offset.y },
+      //                           orderItems: ["Beans", "Curry"]
+      //                         }
+      //            );
+                 this.location.x = event.clientX -10 - offset.x;
+                 this.location.y = event.clientY - 10 - offset.y;
     },
+
     addToOrder: function (event) {
       this.orderedBurgers[event.name] = event.amount;
 
-    console.log(this.orderedBurgers)
+    
 
   
 },
-    markDone: function (){
-        // socket.emit("addClient", { contact: this.contact,
-        //                         firstName: this.fn,
-                                
-        //                       }
-        //          );
-       // console.log(this.fn, this.em, this.st, this.hn, this.pm, this.gender)
-        
-      
-       },
+   
        setLocation: function(event){
         this.location.x= event.clientX - 10 - event.currentTarget.getBoundingClientRect().left;
         this.location.y= event.clientY - 10 - event.currentTarget.getBoundingClientRect().top;
-        console.log(this.location)
+       
        },
 
     }
@@ -183,14 +203,16 @@ export default {
 
 <style>
  #map-container{
+  
     overflow: scroll;
-    height: 200px;
+    height: 400px;
+    width: 100%;
   }
   #map {
     background: url("../../public/img/polacks.jpg");
     background-size: cover;
-    width: 100%;
-    height: 100vh;
+    width:1920px;
+    height: 1078px;
   }
  
 
@@ -232,7 +254,6 @@ body {
 
  div {
 
-    /* padding: 10px 65px 10px; */
     margin: 1px 2px 3px 4px;
 
  }

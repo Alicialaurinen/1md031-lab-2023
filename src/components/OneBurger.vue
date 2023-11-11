@@ -38,11 +38,12 @@
 },
 methods: {
   Increase: function() {
-    if ( this.amountOrdered!=0){
-    this.amountOrdered += 1;}
+   
+    this.amountOrdered += 1;
   },
   Decrease: function(){
-    this.amountOrdered -= 1
+    if ( this.amountOrdered!=0){
+    this.amountOrdered -= 1}
   },
   addBurger: function () {
   this.$emit('orderedBurger', { name:   this.burger.name, 

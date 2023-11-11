@@ -11,7 +11,8 @@ body {
     height: 410px;
     color: black;
     overflow:hidden
-   
+    width: 100%;
+    heigth: 20%
 
  }
  
@@ -60,7 +61,7 @@ body {
     background-color: aquamarine;
     margin-left: 20px;
     margin-right: 20px;
-    
+
  }
  button {
     margin-top: 50px;

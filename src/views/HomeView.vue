@@ -1,7 +1,5 @@
 <template>
-    <!-- <div id="map" v-on:click="addOrder">
-      click here
-    </div> -->
+   
   <header>
         <h1>Burgers Online</h1>
 
@@ -44,6 +42,18 @@
                     <input type="number" id="housenumber" v-model="hn" required="required" placeholder="House number"
                         maxlength="10">
                 </p>
+
+                <section id = "map-container">
+                  
+                  <div id="map" v-on:click="addOrder" >
+                      click here
+                  
+                 <div id = "dots" v-bind:style="{left: location.x + 'px', top: location.y + 'px'}" v-bind:key="'dots' + key" v-on:click="setLocation">
+                  {{key}}
+                 </div>
+                </div>
+                  
+                  </section>
                 <p>
                     <label for="payment">Payment method</label><br>
                     <select id="paymentmethod" v-model="pm">
@@ -68,11 +78,13 @@
                     </label>
                 </p>
 
-            </form>
+              </form>
+            
             
             <button  class= "button"  type="submit" v-on:click="markDone"> Place Order
                 <img src="img/send.png" width="70" height="30">
             </button> <br>
+            
 
         </section>
 
@@ -121,13 +133,11 @@ export default {
       hn:'',
       pm:'',
       gender:'',
-      orderedBurgers: ''
+      orderedBurgers: {},
+      location: { x: 0, y: 0}
     }
   },
-    // created: function () {
-    //   socket.on('clientdata', data =>
-    //     this.contact = data.contact);
-    // },
+    
   
   methods: {
     getOrderNumber: function () {
@@ -144,8 +154,9 @@ export default {
                  );
     },
     addToOrder: function (event) {
-      //this.orderedBurgers = event;
-   console.log(this.orderedBurgers)
+      this.orderedBurgers[event.name] = event.amount;
+
+    console.log(this.orderedBurgers)
 
   
 },
@@ -158,18 +169,30 @@ export default {
        // console.log(this.fn, this.em, this.st, this.hn, this.pm, this.gender)
         
       
-       }
+       },
+       setLocation: function(event){
+        this.location.x= event.clientX - 10 - event.currentTarget.getBoundingClientRect().left;
+        this.location.y= event.clientY - 10 - event.currentTarget.getBoundingClientRect().top;
+        console.log(this.location)
+       },
+
     }
   }
 
 </script>
 
 <style>
-  #map {
-    width: 300px;
-    height: 300px;
-    background-color: red;
+ #map-container{
+    overflow: scroll;
+    height: 200px;
   }
+  #map {
+    background: url("../../public/img/polacks.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  }
+ 
 
 body {
     font-family: 'Times New Roman', Times, serif;
@@ -206,8 +229,6 @@ body {
     color: whitesmoke;
 
  }
- 
- 
 
  div {
 
@@ -229,9 +250,7 @@ body {
 
  }
  
-
  .wrapper {
-  
   margin-top: 70px;
   margin-bottom: 30px;
     display: grid;
@@ -251,6 +270,24 @@ body {
     height: 30;
 
  }
+ #dots {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-repeat: no-repeat;
+    width:1920px;
+    height: 1078px;
+    cursor: crosshair;
+  }
+  #dots div {
+    position: absolute;
+    background: black;
+    color: white;
+    border-radius: 10px;
+    width:20px;
+    height:20px;
+    text-align: center;
+  }
 
 
 </style>

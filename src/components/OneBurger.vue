@@ -11,7 +11,15 @@
                             <dd>{{burger.lactose}}</dd>
                             <dd>Calories: {{ burger.kCal }}</dd>
                         </dl>
-                       <button v-on:click="Increase()"> more </button> {{amountOrdered}} <button v-on:click="Decrease()"> less </button>
+                        Choose amount:
+                       <button v-on:click="Increase(key)"> more </button> 
+                       {{amountOrdered}} 
+                       <button v-on:click="Decrease(key)"> less </button>
+                       <div>
+                       <button v-on:click="addBurger()">
+                        <img src="img/cart.jpeg" width="30" height="30">
+                       </button>
+                      </div>
                     </span>
        {{ burger.URL}}
     </div>
@@ -30,16 +38,18 @@
 },
 methods: {
   Increase: function() {
-    this.amountOrdered += 1;
-    this.$emit('orderedBurger', { name:   this.burger.name, 
-                                amount: this.amountOrdered 
-                              }
-  );
-  console.log("hello")
+    if ( this.amountOrdered!=0){
+    this.amountOrdered += 1;}
   },
   Decrease: function(){
     this.amountOrdered -= 1
-  }
+  },
+  addBurger: function () {
+  this.$emit('orderedBurger', { name:   this.burger.name, 
+                                amount: this.amountOrdered 
+                              }
+  );
+},
 }
   }
   </script>

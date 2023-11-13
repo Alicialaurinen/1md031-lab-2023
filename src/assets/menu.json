@@ -3,20 +3,20 @@
     {
       "name": "The Mouth-Watering Burger",
       "kCal": 900,
-      "lactose": true,
-      "gluten": false,
+      "lactose": "Lactose-free",
+      "gluten": "Gluten-free",
       "img": "../img/Mouthwateringburger.jpeg"
     }, {
         "name": "The Devils-Burger",
         "kCal": 100,
-        "lactose": true,
-        "gluten": false,
+        "lactose": "Nut-free",
+        "gluten": "Less-Spicy",
         "img": "../img/devils burger - stor – medel.jpeg"
       }, {
         "name": "The Basic Cheese-Burger",
         "kCal": 500,
-        "lactose": true,
-        "gluten": false,
+        "lactose": "Lactose-free",
+        "gluten": "Dubble-patty",
         "img": "../img/THEcheeseburger.jpeg"
       }
   ]

@@ -5,22 +5,24 @@
         {{ burger.name }}
       </h3>
       <img class="bilder" v-bind:src="burger.img" />
-      <dl>
-        <dt>Can be ordered as:</dt>
-        <dd>{{ burger.gluten }}</dd>
-        <dd>{{ burger.lactose }}</dd>
-        <div>
-
-        
+      <div>
         Amount of Calories: {{ burger.kCal }}
       </div>
+      <img id="spicy" v-bind:src="spicy(burger.spicy)"/>
+      
+      <dl id="allergi-information">
+        <dt>Contains:</dt>
+        <dd>{{ gluten(burger.gluten) }}</dd>
+        <dd>{{ lactose(burger.lactose) }}</dd>
+        <dd>{{ nuts(burger.nuts) }}</dd>
       </dl>
+     
       Choose amount:
-      <button v-on:click="Increase(key)"> more </button>
+      <button v-on:click="Increase(key)"> + </button>
       {{ amountOrdered }}
-      <button v-on:click="Decrease(key)"> less </button>
+      <button v-on:click="Decrease(key)"> - </button>
       <div>
-        <button v-on:click="addBurger()">
+        <button id="addToCart" v-on:click="addBurger()">
           <img src="img/cart.jpeg" width="30" height="30">
         </button>
       </div>
@@ -38,6 +40,8 @@ export default {
   data: function () {
     return {
       amountOrdered: 0,
+      
+      
     }
   },
   methods: {
@@ -57,7 +61,44 @@ export default {
       }
       );
     },
+    lactose: function(lactose){
+      if(lactose){
+        return "Lactose"
+      }
+      else{
+        return ""
+      }
+
+
+    },
+    gluten: function(gluten){
+      if(gluten){
+        return "Gluten"
+      }
+      else{
+        return ""
+      }
+
+
+    },
+    nuts: function(nuts){
+      if(nuts){
+        return "Nuts"
+      }
+      else{
+        return ""
+      }
+    },
+    spicy: function(spicy){
+      if(spicy){
+        return "../img/extraspicy.png"
+      }
+      else{
+        return "../img/spicy.png"
+      }
+
   }
+}
 }
 </script>
   
@@ -69,6 +110,23 @@ export default {
   }*/
 .bilder {
   max-width: 100%;
+}
+#allergi-information dt{
+  text-decoration: underline;
+  margin-left: 20px;
+  
+}
+
+#allergi-information dd {
+  font-weight: bold;
+  
+}
+#addToCart{
+  margin-top: 15px;
+}
+#spicy{
+  width: 30px;
+  height: 30px;
 }
 </style>
   

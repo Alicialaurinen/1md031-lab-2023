@@ -69,7 +69,7 @@
         <p style="display: inline-block">
           <label for="gender">Gender</label><br>
           <label>
-            <input type="radio" v-model="gender" value="Female" checked> Female
+            <input type="radio" v-model="gender" value="Female" checked > Female
           </label>
           <label>
             <input type="radio" v-model="gender" value="Male"> Male
@@ -80,11 +80,20 @@
         </p>
 
       </form>
-      <button v-on:click="markDone" class="button" type="submit"> Place Order
+      <button v-on:click="markDone" @click.prevent="notify" class="button" type="submit"> Place Order
         <img src="img/send.png" width="70" height="30">
       </button> <br>
 
-
+    </section>
+    <section id="receipt" v-if="showReceipt">
+      Thank you for your order!
+      <div>Here is your receipt:</div>
+      <ul>
+      <div v-for="(item, itemKey) in orderedBurgers" :key="itemKey">
+        {{ itemKey }}: {{ item }}
+    
+      </div>
+</ul>
     </section>
 
 
@@ -134,14 +143,33 @@ export default {
       pm: '',
       gender: '',
       orderedBurgers: {},
-      location: { x: 0, y: 0 }
+      location: { x: 0, y: 0 },
+      showReceipt: false,
     }
   },
 
 
   methods: {
     markDone: function () {
+      
+      if(this.fn === ""){
+      alert('You have not filled in all information')}
+      else if(this.em === ""){
+        alert('You have not filled in all information')
+      }
+      else if(this.pm === ""){
+        alert('You have not filled in all information')
+      }
+      else if(this.gender === ""){
+        alert('You have not filled in all information')
+      }
+      else if(this.location.x === 0){
+        alert('You have not filled in all information')
+      }
+    
 
+      else{
+        this.showReceipt = true;
       socket.emit("addOrder", {
         orderId: this.getOrderNumber(),
         details: {
@@ -157,11 +185,9 @@ export default {
 
         },
         orderItems: this.orderedBurgers
-
-
-
       }
-      );
+      );}
+      
 
     },
     getOrderNumber: function () {
@@ -186,12 +212,15 @@ export default {
       this.orderedBurgers[event.name] = event.amount;
 
     },
-
     setLocation: function (event) {
       this.location.x = event.clientX - 10 - event.currentTarget.getBoundingClientRect().left;
       this.location.y = event.clientY - 10 - event.currentTarget.getBoundingClientRect().top;
+      console.log("reached in func")
+      
 
     },
+   
+
 
   }
 }
@@ -199,6 +228,14 @@ export default {
 </script>
 
 <style>
+
+#receipt{
+  margin-left: 15px;
+  margin-top: 15px;
+}
+#receipt div{
+  margin-top: 10px;
+}
 #map-container {
 
   overflow: scroll;
@@ -311,4 +348,9 @@ button:hover {
   width: 20px;
   height: 20px;
   text-align: center;
-}</style>
+}
+
+
+
+
+</style>

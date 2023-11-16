@@ -239,6 +239,8 @@ export default {
 #map-container {
 
   overflow: scroll;
+  height: 400px;
+  width: 100%;
  
 }
 

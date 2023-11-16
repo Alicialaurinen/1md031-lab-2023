@@ -108,9 +108,8 @@ export default {
 /*img{
     width="300" height="300"
   }*/
-.bilder {
-  max-width: 100%;
-}
+
+
 #allergi-information dt{
   text-decoration: underline;
   margin-left: 20px;
@@ -128,5 +127,12 @@ export default {
   width: 30px;
   height: 30px;
 }
+
+.bilder {
+  max-width: 100%;
+  max-height: 100%;
+
+}
+
 </style>
   

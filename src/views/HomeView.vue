@@ -44,8 +44,8 @@
 
           <div id="map" v-on:click="addOrder">
             click here to choose delivery adress
-            <div id="dots" v-bind:style="{ left: location.x + 'px', top: location.y + 'px' }">
-              <div>
+            <div id="dots" >
+              <div v-bind:style="{ left: location.x + 'px', top: location.y + 'px' }">
                 T
               </div>
 
@@ -239,8 +239,7 @@ export default {
 #map-container {
 
   overflow: scroll;
-  height: 400px;
-  width: 100%;
+ 
 }
 
 #map {
@@ -269,17 +268,6 @@ header {
 h3 {
   padding: 20px;
   font-size: 20px
-}
-
-.Burgers {
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  border: 15px double whitesmoke;
-  text-align: center;
-
-
 }
 
 #chooseburger {
@@ -349,6 +337,20 @@ button:hover {
   height: 20px;
   text-align: center;
 }
+
+  
+
+  .Burgers {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border: 15px double whitesmoke;
+    text-align: center;
+  
+  
+  }
+  
 
 
 
